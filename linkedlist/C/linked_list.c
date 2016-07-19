@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <stdbool.h>
 
 typedef struct {
   int data;
@@ -98,6 +99,26 @@ int linked_list_length_recursive (linkedl *head){
   }
 }
 
+bool search_element_iterative (linkedl *head, int element){
+  while (head != NULL){
+    if (head->data == element){
+      return true;
+    }
+    head = head->next;
+  }
+  return false;
+}
+
+bool search_element_recursive (linkedl *head, int element){
+  if (head == NULL){
+    return false;
+  }
+  if (head->data == element) {
+    return true;
+  }
+  return search_element_recursive (head->next, element);
+}
+
 int main(){
   linkedl *node1 = NULL;
   node1 = (linkedl*)malloc(sizeof(linkedl));
@@ -115,9 +136,14 @@ int main(){
   insert_end(node1, 6);
   insert_middle(node2, 7);
   printlinked(node1);
-  linked_list_length_iterative(node1);
+  //linked_list_length_iterative(node1);
   int count = 0;
   count = linked_list_length_recursive(node1);
-  printf("%d\n", count);
+  //printf("%d\n", count);
+  bool value = 0;
+  bool value1 = 0;
+  value = search_element_iterative(node1, 2);
+  value1 = search_element_recursive(node1, 100);
+  printf("%d\n", value1);
   return 0;
 }
