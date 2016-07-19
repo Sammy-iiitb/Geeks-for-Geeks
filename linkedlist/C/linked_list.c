@@ -161,6 +161,30 @@ void nth_node_from_end (struct linkedl *head, int nth_element){
   printf("%d\n", final->data);
 }
 
+void delete_linked_list (struct linkedl **head){
+  struct linkedl *node = *head;
+  node = node->next;
+  struct linkedl *node_next;
+  while (node != NULL){
+    node_next = node->next;
+    free(node);
+    node = node_next;
+  }
+  *head = NULL;
+}
+
+void number_of_times_same_int (struct linkedl *head, int number){
+  int count = 0;
+  struct linkedl *node = head;
+  while (node != NULL){
+    if (node->data == number){
+      count++;
+    }
+    node = node->next;
+  }
+  printf("%d\n", count);
+}
+
 int main(){
   struct linkedl *node1 = NULL;
   node1 = (struct linkedl*)malloc(sizeof(struct linkedl));
@@ -177,6 +201,8 @@ int main(){
   //insert_start(&node1, 5);
   insert_end(node1, 6);
   insert_middle(node2, 7);
+  insert_end(node1, 1);
+  insert_end(node1, 1);
   printlinked(node1);
   //linked_list_length_iterative(node1);
   //int count = 0;
@@ -189,6 +215,11 @@ int main(){
   //printf("%d\n", value1);
   //nth_node (node1, 5);
   //print_middle_linked_list(node1);
-  nth_node_from_end(node1, 5);
+  //nth_node_from_end(node1, 5);
+  //delete_linked_list(&node1);
+  //printlinked(node1);
+  number_of_times_same_int(node1, 1);
+  delete_linked_list(&node1);
+  printlinked(node1);
   return 0;
 }
