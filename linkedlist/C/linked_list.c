@@ -124,6 +124,15 @@ linkedl *deletenode (linkedl **head, int key){
   //similar to using newnode function pointer
 }
 
+void nth_node (linkedl *head, int nth){
+  int count = 1;
+  while (count != nth && head != NULL){
+    head = head->next;
+    count++;
+  }
+  printf("%d\n", head->data);
+}
+
 int main(){
   linkedl *node1 = NULL;
   node1 = (linkedl*)malloc(sizeof(linkedl));
@@ -142,13 +151,14 @@ int main(){
   insert_middle(node2, 7);
   printlinked(node1);
   //linked_list_length_iterative(node1);
-  int count = 0;
-  count = linked_list_length_recursive(node1);
+  //int count = 0;
+  //count = linked_list_length_recursive(node1);
   //printf("%d\n", count);
-  bool value = 0;
-  bool value1 = 0;
-  value = search_element_iterative(node1, 2);
-  value1 = search_element_recursive(node1, 100);
-  printf("%d\n", value1);
+  //bool value = 0;
+  //bool value1 = 0;
+  //value = search_element_iterative(node1, 2);
+  //value1 = search_element_recursive(node1, 100);
+  //printf("%d\n", value1);
+  nth_node (node1, 5);
   return 0;
 }
