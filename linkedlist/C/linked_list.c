@@ -2,34 +2,34 @@
 #include <stdlib.h>
 #include <stdbool.h>
 
-typedef struct {
+struct linkedl {
   int data;
   struct linkedl *next;
-} linkedl;
+};
 
 struct linkedl *newnode(int value){
-  linkedl *node = (linkedl*)malloc(sizeof(linkedl));
+  struct linkedl *node = (struct linkedl*)malloc(sizeof(struct linkedl));
   node->data = value;
   node->next = NULL;
 }
 
-int printlinked(linkedl *root){
+int printlinked(struct linkedl *root){
   while(root!=NULL){
     printf("%d\n", root->data);
     root = root->next;
   }
 }
 
-void insert_start(linkedl **head, int temp){
-  linkedl *new_node = (linkedl*)malloc(sizeof(linkedl));
+void insert_start(struct linkedl **head, int temp){
+  struct linkedl *new_node = (struct linkedl*)malloc(sizeof(struct linkedl));
   new_node->data = temp;
   new_node->next = *head;
   *head = new_node;
 }
 
-void insert_end(linkedl *head, int temp){
-  linkedl *new_node = NULL;
-  new_node = (linkedl*)malloc(sizeof(linkedl));
+void insert_end(struct linkedl *head, int temp){
+  struct linkedl *new_node = NULL;
+  new_node = (struct linkedl*)malloc(sizeof(struct linkedl));
   if (head == NULL){
     head = new_node;
     new_node->data = temp;
@@ -45,16 +45,16 @@ void insert_end(linkedl *head, int temp){
   }
 }
 
-void insert_middle(linkedl *node_pre, int temp){
-  linkedl *new_node = NULL;
-  new_node = (linkedl*)malloc(sizeof(linkedl));
+void insert_middle(struct linkedl *node_pre, int temp){
+  struct linkedl *new_node = NULL;
+  new_node = (struct linkedl*)malloc(sizeof(struct linkedl));
   new_node->data = temp;
   new_node->next = node_pre->next;
   node_pre->next = new_node;
 }
 
-/*void delete_given_key(linkedl **head, int key){
-  linkedl *temp = *head, *prev;
+/*void delete_given_key(struct linkedl **head, int key){
+  struct linkedl *temp = *head, *prev;
   temp = *head;
   head_next = *head->next;
   if (*head->data == key){
@@ -75,7 +75,7 @@ void insert_middle(linkedl *node_pre, int temp){
   }
 }*/
 
-int linked_list_length_iterative (linkedl *head){
+int linked_list_length_iterative (struct linkedl *head){
   int count = 0;
   if (head == NULL){
     printf("Linked List is empty");
@@ -90,7 +90,7 @@ int linked_list_length_iterative (linkedl *head){
   return count;
 }
 
-int linked_list_length_recursive (linkedl *head){
+int linked_list_length_recursive (struct linkedl *head){
   if (head == NULL){
     return 0;
   }
@@ -99,7 +99,7 @@ int linked_list_length_recursive (linkedl *head){
   }
 }
 
-bool search_element_iterative (linkedl *head, int element){
+bool search_element_iterative (struct linkedl *head, int element){
   while (head != NULL){
     if (head->data == element){
       return true;
@@ -109,7 +109,7 @@ bool search_element_iterative (linkedl *head, int element){
   return false;
 }
 
-bool search_element_recursive (linkedl *head, int element){
+bool search_element_recursive (struct linkedl *head, int element){
   if (head == NULL){
     return false;
   }
@@ -119,12 +119,12 @@ bool search_element_recursive (linkedl *head, int element){
   return search_element_recursive (head->next, element);
 }
 
-linkedl *deletenode (linkedl **head, int key){
+struct linkedl *deletenode (struct linkedl **head, int key){
   //here reference is used so as to modify the pointer
   //similar to using newnode function pointer
 }
 
-void nth_node (linkedl *head, int nth){
+void nth_node (struct linkedl *head, int nth){
   int count = 1;
   while (count != nth && head != NULL){
     head = head->next;
@@ -133,15 +133,27 @@ void nth_node (linkedl *head, int nth){
   printf("%d\n", head->data);
 }
 
+void print_middle_linked_list (struct linkedl *head){
+  struct linkedl *double_node = head;
+  struct linkedl *node = head;
+  if (head != NULL && head->next != NULL){
+    while (double_node != NULL && double_node->next != NULL){
+      double_node = double_node->next->next;
+      node = node->next;
+    }
+    printf("%d\n", node->data);
+  }
+}
+
 int main(){
-  linkedl *node1 = NULL;
-  node1 = (linkedl*)malloc(sizeof(linkedl));
+  struct linkedl *node1 = NULL;
+  node1 = (struct linkedl*)malloc(sizeof(struct linkedl));
   node1->data = 1;
-  linkedl *node2 = NULL;
-  node2 = (linkedl*)malloc(sizeof(linkedl));
+  struct linkedl *node2 = NULL;
+  node2 = (struct linkedl*)malloc(sizeof(struct linkedl));
   node2->data = 2;
-  linkedl *node3 = NULL;
-  node3 = (linkedl*)malloc(sizeof(linkedl));
+  struct linkedl *node3 = NULL;
+  node3 = (struct linkedl*)malloc(sizeof(struct linkedl));
   node3->data = 3;
   node1->next = node2;
   node2->next = node3;
@@ -160,5 +172,6 @@ int main(){
   //value1 = search_element_recursive(node1, 100);
   //printf("%d\n", value1);
   nth_node (node1, 5);
+  print_middle_linked_list(node1);
   return 0;
 }
