@@ -145,6 +145,22 @@ void print_middle_linked_list (struct linkedl *head){
   }
 }
 
+void nth_node_from_end (struct linkedl *head, int nth_element){
+  int count = 1;
+  struct linkedl *node = head;
+  struct linkedl *final = (struct linkedl*)malloc(sizeof(struct linkedl));
+  while (count != nth_element){
+    node = node->next;
+    count++;
+  }
+  final = head;
+  while (node->next != NULL){
+    final = final->next;
+    node = node->next;
+  }
+  printf("%d\n", final->data);
+}
+
 int main(){
   struct linkedl *node1 = NULL;
   node1 = (struct linkedl*)malloc(sizeof(struct linkedl));
@@ -171,7 +187,8 @@ int main(){
   //value = search_element_iterative(node1, 2);
   //value1 = search_element_recursive(node1, 100);
   //printf("%d\n", value1);
-  nth_node (node1, 5);
-  print_middle_linked_list(node1);
+  //nth_node (node1, 5);
+  //print_middle_linked_list(node1);
+  nth_node_from_end(node1, 5);
   return 0;
 }
