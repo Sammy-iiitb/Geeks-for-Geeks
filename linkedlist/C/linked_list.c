@@ -52,7 +52,51 @@ void insert_middle(linkedl *node_pre, int temp){
   node_pre->next = new_node;
 }
 
+/*void delete_given_key(linkedl **head, int key){
+  linkedl *temp = *head, *prev;
+  temp = *head;
+  head_next = *head->next;
+  if (*head->data == key){
+    *head = *head->next;
+  }
+  else if (*head->next->data == key){
+    free(head_next);
+    *head->next = NULL;
+  }
+  else {
+    while (*head != NULL && *head->next->data != key){
+      if (*head_next->next->data == key){
+        head_next->next = head_next->next->next;
+        free (head_next->next);
+      }
+      *head = *head->next;
+    }
+  }
+}*/
 
+int linked_list_length_iterative (linkedl *head){
+  int count = 0;
+  if (head == NULL){
+    printf("Linked List is empty");
+  }
+  else {
+    while (head != NULL){
+      count++;
+      head = head->next;
+    }
+  }
+  printf("%d\n", count);
+  return count;
+}
+
+int linked_list_length_recursive (linkedl *head){
+  if (head == NULL){
+    return 0;
+  }
+  else {
+    return 1 + linked_list_length_recursive(head->next);
+  }
+}
 
 int main(){
   linkedl *node1 = NULL;
@@ -71,5 +115,9 @@ int main(){
   insert_end(node1, 6);
   insert_middle(node2, 7);
   printlinked(node1);
+  linked_list_length_iterative(node1);
+  int count = 0;
+  count = linked_list_length_recursive(node1);
+  printf("%d\n", count);
   return 0;
 }
