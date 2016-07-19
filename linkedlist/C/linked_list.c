@@ -52,6 +52,8 @@ void insert_middle(linkedl *node_pre, int temp){
   node_pre->next = new_node;
 }
 
+
+
 int main(){
   linkedl *node1 = NULL;
   node1 = (linkedl*)malloc(sizeof(linkedl));
