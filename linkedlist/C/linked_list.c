@@ -119,6 +119,11 @@ bool search_element_recursive (linkedl *head, int element){
   return search_element_recursive (head->next, element);
 }
 
+linkedl *deletenode (linkedl **head, int key){
+  //here reference is used so as to modify the pointer
+  //similar to using newnode function pointer
+}
+
 int main(){
   linkedl *node1 = NULL;
   node1 = (linkedl*)malloc(sizeof(linkedl));
