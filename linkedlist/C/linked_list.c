@@ -53,27 +53,25 @@ void insert_middle(struct linkedl *node_pre, int temp){
   node_pre->next = new_node;
 }
 
-/*void delete_given_key(struct linkedl **head, int key){
-  struct linkedl *temp = *head, *prev;
-  temp = *head;
-  head_next = *head->next;
-  if (*head->data == key){
-    *head = *head->next;
-  }
-  else if (*head->next->data == key){
-    free(head_next);
-    *head->next = NULL;
+void delete_given_key(struct linkedl **head, int key){
+  struct linkedl *prev = *head;
+  struct linkedl *temp;
+  if (prev->data == key){
+    *head = NULL;
   }
   else {
-    while (*head != NULL && *head->next->data != key){
-      if (*head_next->next->data == key){
-        head_next->next = head_next->next->next;
-        free (head_next->next);
-      }
-      *head = *head->next;
+    while (prev != NULL && prev->data != key){
+      temp = prev;
+      prev = prev->next;
+      //temp = temp->next;
     }
+    if (prev == NULL){
+      return;
+    }
+    temp->next = prev->next;
+    free (prev);
   }
-}*/
+}
 
 int linked_list_length_iterative (struct linkedl *head){
   int count = 0;
@@ -185,6 +183,14 @@ void number_of_times_same_int (struct linkedl *head, int number){
   printf("%d\n", count);
 }
 
+void reverse_linked_list (struct linkedl **head){
+  struct linkedl *node = *head;
+  struct linkedl *node1 = node->next;
+  while (node != NULL){
+
+  }
+}
+
 int main(){
   struct linkedl *node1 = NULL;
   node1 = (struct linkedl*)malloc(sizeof(struct linkedl));
@@ -204,6 +210,7 @@ int main(){
   insert_end(node1, 1);
   insert_end(node1, 1);
   printlinked(node1);
+  printf("\n");
   //linked_list_length_iterative(node1);
   //int count = 0;
   //count = linked_list_length_recursive(node1);
@@ -218,8 +225,10 @@ int main(){
   //nth_node_from_end(node1, 5);
   //delete_linked_list(&node1);
   //printlinked(node1);
-  number_of_times_same_int(node1, 1);
-  delete_linked_list(&node1);
+  //number_of_times_same_int(node1, 1);
+  //delete_linked_list(&node1);
+  //printlinked(node1);
+  delete_given_key(&node1, 2);
   printlinked(node1);
   return 0;
 }
