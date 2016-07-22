@@ -73,6 +73,26 @@ void delete_given_key(struct linkedl **head, int key){
   }
 }
 
+void delete_given_position(struct linkedl **head, int location){
+  struct linkedl *temp = *head;
+  struct linkedl *prev;
+  int location_count = 1;
+  if (location == 1){
+    temp = temp->next;
+    free (*head);
+    *head = temp;
+  }
+  else {
+    while (location_count != location){
+      prev = temp;
+      temp = temp->next;
+      location_count++;
+    }
+    prev->next = temp->next;
+    free(temp);
+  }
+}
+
 int linked_list_length_iterative (struct linkedl *head){
   int count = 0;
   if (head == NULL){
@@ -228,7 +248,8 @@ int main(){
   //number_of_times_same_int(node1, 1);
   //delete_linked_list(&node1);
   //printlinked(node1);
-  delete_given_key(&node1, 2);
+  //delete_given_key(&node1, 2);
+  delete_given_position(&node1, 1);
   printlinked(node1);
   return 0;
 }
