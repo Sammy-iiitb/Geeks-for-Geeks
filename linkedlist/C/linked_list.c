@@ -93,6 +93,10 @@ void delete_given_position(struct linkedl **head, int location){
   }
 }
 
+void swap_nodes_without_data_swapping (struct linkedl **head, int x, int y){
+
+}
+
 int linked_list_length_iterative (struct linkedl *head){
   int count = 0;
   if (head == NULL){
@@ -204,11 +208,17 @@ void number_of_times_same_int (struct linkedl *head, int number){
 }
 
 void reverse_linked_list (struct linkedl **head){
-  struct linkedl *node = *head;
-  struct linkedl *node1 = node->next;
-  while (node != NULL){
-
+  struct linkedl *first = NULL;
+  struct linkedl *middle = *head;
+  struct linkedl *last;
+  while (middle != NULL){
+    //middle = first->next;
+    last = middle->next;
+    middle->next = first;
+    first = middle;
+    middle = last;
   }
+  *head = first;
 }
 
 int main(){
@@ -249,7 +259,8 @@ int main(){
   //delete_linked_list(&node1);
   //printlinked(node1);
   //delete_given_key(&node1, 2);
-  delete_given_position(&node1, 1);
+  //delete_given_position(&node1, 1);
+  reverse_linked_list (&node1);
   printlinked(node1);
   return 0;
 }
