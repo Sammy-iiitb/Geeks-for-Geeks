@@ -221,6 +221,20 @@ void reverse_linked_list (struct linkedl **head){
   *head = first;
 }
 
+int detect_loop (struct linkedl *head){
+  struct linkedl *node_1 = *head;
+  struct linkedl *node_2 = node_1->next;
+  while (node_1 != NULL && node_2 != NULL && node_2->next !=NULL){
+    node_1 = node_1->next;
+    node_2 = node_2->next->next;
+    if (node_1 == node_2){
+      printf("Loop Found");
+      return 1;
+    }
+  }
+  return 0;
+}
+
 int main(){
   struct linkedl *node1 = NULL;
   node1 = (struct linkedl*)malloc(sizeof(struct linkedl));
@@ -262,5 +276,6 @@ int main(){
   //delete_given_position(&node1, 1);
   reverse_linked_list (&node1);
   printlinked(node1);
+  detect_loop(node1);
   return 0;
 }
